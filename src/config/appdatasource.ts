@@ -2,7 +2,6 @@ import 'dotenv/config';
 import { DataSource } from "typeorm";
 import { Paciente } from "../entities/paciente";
 import { Medico } from "../entities/medico"; // <--- agrega esta línea
-import { Usuario } from "../entities/usuario";
 import { Especialidad } from "../entities/especialidad";
 
 const AppDataSource = new DataSource({
@@ -12,7 +11,7 @@ const AppDataSource = new DataSource({
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_NAME || 'nombre_base',
-    entities: [Paciente, Medico, Especialidad, Usuario],
+    entities: [Paciente, Medico, Especialidad],
     synchronize: false,
 });
 
