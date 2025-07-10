@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Sistema Hospitalario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="css/style_dashboard.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crushed&family=Dancing+Script:wght@400..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Fjalla+One&family=Jost:ital,wght@0,100..900;1,100..900&family=Lobster&family=Luckiest+Guy&family=Roboto:ital,wght@0,100..900;1,100..900&family=Savate:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="css/style_fonts.css">
+
+
+</head>
+
+
+<body onload="checkAuth()">
+  <script>
+    (function checkAuth() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("Debe iniciar sesión para acceder al sistema.");
+        window.location.href = 'login.html';
+      }
+    })();
+  </script>
+  <body>
+</body>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h4><i class="fas fa-hospital"></i> Sistema Hospitalario</h4>
+    </div>
+    
+    <div class="user-profile">
+      <img src="https://ui-avatars.com/api/?name=D+C&background=005b96&color=fff&size=100" alt="Usuario" class="user-avatar">
+      <h5 class="user-name">Dr. Diaz Castañeda</h5>
+      <p class="user-role">Médico General</p>
+    </div>
+    
+    <div class="sidebar-menu">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="inicio.html">
+            <i class="fas fa-home"></i> Inicio
+          </a>
+        </li>    
+        <li class="nav-item">
+          <a class="nav-link" href="medicos.html">
+            <i class="fas fa-user-md"></i> Médicos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pacientes.html">
+            <i class="fas fa-procedures"></i> Pacientes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-calendar-check"></i> Citas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="dashboard.html">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-file-medical"></i> Reportes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-cog"></i> Configuración
+          </a>
+        </li>
+        <li class="nav-item mt-4">
+          <a class="nav-link" href="#" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h2 class="page-title bebas-neue-regular"><i class="fas fa-chart-line"></i> Panel de Control</h2>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card bg-pacientes">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-procedures"></i>
+            </div>
+            <div class="stat-number" id="pacientes-count">0</div>
+            <div class="stat-title">Pacientes Registrados</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="card bg-medicos">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="stat-number" id="medicos-count">0</div>
+            <div class="stat-title">Médicos Activos</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="card bg-citas">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="stat-number" id="citas-count">0</div>
+            <div class="stat-title">Citas Hoy</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="card bg-emergencias">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-ambulance"></i>
+            </div>
+            <div class="stat-number" id="emergencias-count">0</div>
+            <div class="stat-title">Emergencias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gráfico mejorado: Pacientes vs Médicos -->
+    <div class="row">
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-chart-bar"></i> Relación Pacientes vs Médicos
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="grafico"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-user-md"></i> Médicos por Especialidad
+          </div>
+          <div class="card-body">
+            <div id="especialidades-container">
+              <div class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Cargando...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/chart.js"></script>
+  <script>
+    // Toggle sidebar on mobile
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
+    
+    function logout() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

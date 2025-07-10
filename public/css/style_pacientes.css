@@ -1,0 +1,218 @@
+:root {
+      --hospital-blue: #005b96;
+       --hospital-light-blue: #9acbec;
+      --hospital-green: #4caf50;
+      --hospital-red: #e74c3c;
+      --hospital-purple: #9b59b6;
+      --hospital-white: #f8f9fa;
+      --hospital-gray: #ffffff;
+      --sidebar-width: 280px;
+    }
+    
+    /* Sidebar */
+    /*
+    .sidebar {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+    */
+    .sidebar {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+     background: rgba(64, 118, 189, 0.95);
+      backdrop-filter: blur(5px);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      overflow-y: auto; /* ✅ Permite scroll si el contenido crece */
+      z-index: 1000;
+    }
+    
+    .sidebar-header {
+      padding: 20px;
+      background: var(--hospital-blue);
+      color: white;
+      text-align: center;
+    }
+    
+    .user-profile {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .user-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--hospital-light-blue);
+      margin-bottom: 15px;
+    }
+    
+    .user-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .user-role {
+      color: var(--hospital-gray);
+      font-size: 0.9rem;
+    }
+    
+    .sidebar-menu {
+      padding: 20px 0;
+    }
+    
+    .nav-item {
+      margin-bottom: 5px;
+    }
+    
+    .nav-link {
+      color: var(--hospital-gray);
+      padding: 12px 25px;
+      border-left: 4px solid transparent;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover, 
+    .nav-link.active {
+      color: var(--hospital-blue);
+      background-color: var(--hospital-light-blue);
+      border-left: 4px solid var(--hospital-blue);
+    }
+    
+    .nav-link i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      padding: 30px;
+      transition: all 0.3s;
+      background-color: #f5f7fa;
+      min-height: 100vh;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .page-title {
+      font-weight: 600;
+      color: var(--hospital-blue);
+    }
+    
+    /* Estilos para la tabla */
+    .table-responsive {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .table {
+      margin-bottom: 0;
+      background-color: white;
+    }
+    
+    .table thead th {
+      background-color: var(--hospital-blue);
+      color: white;
+      border: none;
+      padding: 12px 15px;
+    }
+    
+    .table tbody tr:hover {
+      background-color: rgba(0, 91, 150, 0.05);
+    }
+    
+    /* Estilos para las cards */
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card-header {
+      background-color: white;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      font-weight: 600;
+      padding: 15px 20px;
+      border-radius: 10px 10px 0 0 !important;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      
+      .menu-toggle {
+        display: block !important;
+      }
+    }
+    
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--hospital-blue);
+      cursor: pointer;
+    }
+    
+    /* Estilos para botones */
+    .btn-success {
+      background-color: var(--hospital-green);
+      border-color: var(--hospital-green);
+    }
+    
+    .btn-primary {
+      background-color: var(--hospital-blue);
+      border-color: var(--hospital-blue);
+    }
+    
+    /* Estilos para el modal */
+    .modal-header {
+      background-color: var(--hospital-blue);
+      color: white;
+    }
+    
+    .btn-close-white {
+      filter: invert(1);
+    }
+
+    .sidebar-menu .nav-link:hover {
+    background: var(--azul-opacidad);
+}
+
+.sidebar-menu .nav-link i {
+    margin-right: 20px;
+    font-size: 25px;
+}
+
+.sidebar-menu .nav-link span {
+    opacity: 0;
+    transition: opacity .3s ease;
+}

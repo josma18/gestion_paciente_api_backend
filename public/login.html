@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso al Sistema Klinic</title>
+  <link rel="stylesheet" href="css/style_login.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+   <video autoplay muted loop id="bg-video">
+    <source src="video/video2.mp4" type="video/mp4" />
+    Tu navegador no soporta el video.
+  </video>
+ 
+  <div class="login-wrapper">
+    <div class="login-box text-center">
+     
+      <form id="loginForm" class="text-start mt-4">
+         <div class="wrapper">
+        <form action="">
+           <h1>MEDITRACK</h1>
+           <div class="input-box">
+          </div>
+        
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="usuario" placeholder="Usuario" required />
+          
+          <i class='bx bxs-user'></i>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="password" placeholder="Contraseña" required /> 
+        
+          <i class='bx bxs-lock-alt' ></i>
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="recordarme" />
+          <label class="form-check-label" for="recordarme">Recordarme</label>
+        </div>
+
+        <button type="submit" class="btn-login w-100">Iniciar Sesión</button>
+
+        <div class="text-center mt-3">
+          <a href="#" class="forgot-password">¿Olvidaste tu clave?</a>
+        </div>
+
+        <div class="alert alert-danger d-none mt-3" id="mensaje" role="alert"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Sistema Klinic v1.0 &copy; 2025</p>
+  </footer>
+
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const mensaje = document.getElementById("mensaje");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      mensaje.classList.add("d-none");
+
+      const usuario = document.getElementById("usuario").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ usuario, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("token", data.token);
+          location.href = "inicio.html";
+        } else {
+          mensaje.innerText = data.mensaje || "Credenciales incorrectas";
+          mensaje.classList.remove("d-none");
+        }
+      } catch (error) {
+        mensaje.innerText = "Error de conexión con el servidor";
+        mensaje.classList.remove("d-none");
+      }
+    });
+  </script>
+</body>
+</html>
